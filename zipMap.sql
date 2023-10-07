@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS zipMap_db;
+DROP DATABASE IF EXISTS zipMap_db; 
 
 CREATE DATABASE zipMap_db;
 
@@ -45,11 +45,19 @@ CREATE TABLE District(
     PRIMARY KEY (district_id)
 );
 
+CREATE TABLE Jurisdiction(
+    jurisdiction_id INTEGER NOT NULL UNIQUE AUTO_INCREMENT,
+    jurisdiction_name VARCHAR(60),
+    district_id INTEGER,
+    FOREIGN KEY (district_id) REFERENCES District(district_id),
+    PRIMARY KEY (jurisdiction_id)
+);
+
 CREATE TABLE Village(
     village_id INTEGER NOT NULL UNIQUE AUTO_INCREMENT,
     village_name VARCHAR(60),
-    district_id INTEGER,
-    FOREIGN KEY (district_id) REFERENCES District(district_id),
+    jurisdiction_id INTEGER,
+    FOREIGN KEY (jurisdiction_id) REFERENCES Jurisdiction(jurisdiction_id),
     PRIMARY KEY (village_id)
 );
 
