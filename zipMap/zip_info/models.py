@@ -71,8 +71,8 @@ class ZipCode(models.Model):
     zip_id = models.AutoField(primary_key=True)
     postal_code = models.CharField(max_length=100, blank=True, null=True)
     country_code = models.CharField(max_length=100, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
     city = models.CharField(max_length=50, blank=True, null=True)
     province = models.ForeignKey(Province, models.DO_NOTHING, blank=True, null=True)
 
