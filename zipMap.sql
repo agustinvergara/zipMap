@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS zipMap_db;
+DROP DATABASE IF EXISTS zipMap_db; 
 
 CREATE DATABASE zipMap_db;
 
@@ -14,8 +14,8 @@ CREATE TABLE Zip_code(
     zip_id INTEGER NOT NULL UNIQUE AUTO_INCREMENT,
     postal_code VARCHAR(100),
     country_code VARCHAR(100) DEFAULT '041',
-    latitude DECIMAL,
-    longitude DECIMAL,
+    latitude DOUBLE,
+    longitude DOUBLE,
     city VARCHAR(50),
     province_id INTEGER,
     FOREIGN KEY (province_id) REFERENCES Province(province_id),
@@ -45,11 +45,19 @@ CREATE TABLE District(
     PRIMARY KEY (district_id)
 );
 
+CREATE TABLE Jurisdiction(
+    jurisdiction_id INTEGER NOT NULL UNIQUE AUTO_INCREMENT,
+    jurisdiction_name VARCHAR(60),
+    district_id INTEGER,
+    FOREIGN KEY (district_id) REFERENCES District(district_id),
+    PRIMARY KEY (jurisdiction_id)
+);
+
 CREATE TABLE Village(
     village_id INTEGER NOT NULL UNIQUE AUTO_INCREMENT,
     village_name VARCHAR(60),
-    district_id INTEGER,
-    FOREIGN KEY (district_id) REFERENCES District(district_id),
+    jurisdiction_id INTEGER,
+    FOREIGN KEY (jurisdiction_id) REFERENCES Jurisdiction(jurisdiction_id),
     PRIMARY KEY (village_id)
 );
 
